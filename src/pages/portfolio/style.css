@@ -1,0 +1,85 @@
+/* Контейнер сетки */
+.po_items_ho {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+  padding-bottom: 24px;
+  contain: content;             /* помогает изоляции перерисовок */
+}
+
+/* Карточка */
+.po_item {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #111;             /* недорогой фон вместо blur */
+  border: 1px solid rgba(255,255,255,.06);
+  transform: translateZ(0);     /* включает композицию на GPU */
+  will-change: transform, opacity;
+}
+
+/* Ссылка занимает всю карточку */
+.po_link { display: block; inset: 0; position: relative; }
+
+/* Картинка */
+.po_item img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16 / 9;         /* стабильный layout, меньше «скачков» */
+  object-fit: cover;
+  filter: saturate(1.05);
+  transition: transform .35s ease, opacity .3s ease;
+  opacity: .0;
+}
+
+.po_item.is-loaded img { opacity: 1; }
+
+/* Лёгкий оверлей без blur */
+.po_item .content {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: end start;
+  gap: 10px;
+  padding: 14px;
+  background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,.0) 55%);
+  opacity: 0;
+  transition: opacity .3s ease;
+  pointer-events: none;
+}
+
+.po_item:hover .content { opacity: 1; }
+.po_item:hover img { transform: scale(1.04); }
+
+/* Текст/кнопка */
+.po_desc {
+  color: #fff;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  margin: 0;
+  text-shadow: 0 1px 2px rgba(0,0,0,.35);
+}
+
+.po_btn {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: .85rem;
+  letter-spacing: .2px;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.35);
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(255,255,255,.08);
+  transition: transform .2s ease, background .2s ease, border-color .2s ease;
+}
+
+.po_item:hover .po_btn {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,.15);
+  border-color: rgba(255,255,255,.6);
+}
+
+/* Тач-устройства: показываем подпись без ховера */
+@media (hover: none) {
+  .po_item .content { opacity: 1; }
+}

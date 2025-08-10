@@ -1,0 +1,7 @@
+export { default as mainBackground } from '../assets/images/IMG_8890_2.jpg'
+export { default as p1 } from '../assets/portfolio/1.png'
+export { default as p2 } from '../assets/portfolio/2.png'
+export { default as p3 } from '../assets/portfolio/3.png'
+export { default as p4 } from '../assets/portfolio/4.png'
+export { default as p5 } from '../assets/portfolio/5.png'
+export { default as p6 } from '../assets/portfolio/6.png'
