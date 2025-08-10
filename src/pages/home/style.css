@@ -232,3 +232,14 @@ section {
 .intro_sec .h_bg-image {
     filter: saturate(0);
 }
+
+/* родитель для absolute-потомка */
+.home .intro_sec {
+  position: relative;
+  overflow: hidden;
+}
+
+/* частицы ниже всего контента, но над базовым фоном */
+.intro_sec .text { position: relative; z-index: 3; }
+.h_bg-image      { position: relative; z-index: 2; }
+/* LeftParticles уже приходит с z-index: 1 */
