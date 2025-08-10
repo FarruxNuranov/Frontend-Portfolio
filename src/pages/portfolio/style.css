@@ -4,7 +4,7 @@
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 18px;
   padding-bottom: 24px;
-  contain: content;             /* помогает изоляции перерисовок */
+  contain: content;
 }
 
 /* Карточка */
@@ -12,29 +12,50 @@
   position: relative;
   border-radius: 14px;
   overflow: hidden;
-  background: #111;             /* недорогой фон вместо blur */
+  background: #111;
   border: 1px solid rgba(255,255,255,.06);
-  transform: translateZ(0);     /* включает композицию на GPU */
+  transform: translateZ(0);
   will-change: transform, opacity;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.3, 1),
+              box-shadow 0.4s ease;
 }
 
-/* Ссылка занимает всю карточку */
-.po_link { display: block; inset: 0; position: relative; }
+.po_item:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+}
+
+/* Ссылка */
+.po_link {
+  display: block;
+  inset: 0;
+  position: relative;
+}
 
 /* Картинка */
 .po_item img {
   width: 100%;
   height: 100%;
-  aspect-ratio: 16 / 9;         /* стабильный layout, меньше «скачков» */
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   filter: saturate(1.05);
-  transition: transform .35s ease, opacity .3s ease;
-  opacity: .0;
+  transition: transform 0.5s ease,
+              opacity 0.3s ease,
+              filter 0.4s ease;
+  opacity: 0;
 }
 
-.po_item.is-loaded img { opacity: 1; }
+.po_item.is-loaded img {
+  opacity: 1;
+}
 
-/* Лёгкий оверлей без blur */
+/* Blur и zoom при ховере */
+.po_item:hover img {
+  transform: scale(1.08);
+  filter: saturate(1.05) blur(4px);
+}
+
+/* Оверлей */
 .po_item .content {
   position: absolute;
   inset: 0;
@@ -42,16 +63,19 @@
   place-content: end start;
   gap: 10px;
   padding: 14px;
-  background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,.0) 55%);
+  background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,0) 55%);
   opacity: 0;
-  transition: opacity .3s ease;
+  transform: translateY(10px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
   pointer-events: none;
 }
 
-.po_item:hover .content { opacity: 1; }
-.po_item:hover img { transform: scale(1.04); }
+.po_item:hover .content {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-/* Текст/кнопка */
+/* Текст */
 .po_desc {
   color: #fff;
   font-size: 0.95rem;
@@ -60,6 +84,7 @@
   text-shadow: 0 1px 2px rgba(0,0,0,.35);
 }
 
+/* Кнопка */
 .po_btn {
   display: inline-block;
   margin-top: 6px;
@@ -70,15 +95,18 @@
   padding: 6px 10px;
   border-radius: 8px;
   background: rgba(255,255,255,.08);
-  transition: transform .2s ease, background .2s ease, border-color .2s ease;
+  transition: transform 0.25s ease,
+              background 0.25s ease,
+              border-color 0.25s ease;
 }
 
 .po_item:hover .po_btn {
-  transform: translateY(-2px);
+  transform: translateY(-3px) scale(1.05);
   background: rgba(255,255,255,.15);
   border-color: rgba(255,255,255,.6);
 }
 
+/* Контейнер секции */
 .portfolio-section {
   position: relative;
   overflow: hidden;
@@ -86,10 +114,13 @@
 
 .portfolio-content {
   position: relative;
-  z-index: 3; /* контент над частицами */
+  z-index: 3;
 }
 
-/* Тач-устройства: показываем подпись без ховера */
+/* Тач-устройства: всегда показывать подпись */
 @media (hover: none) {
-  .po_item .content { opacity: 1; }
+  .po_item .content {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
