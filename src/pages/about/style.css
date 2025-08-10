@@ -45,6 +45,20 @@
     color: var(--text-color);
 }
 
+.about_section {
+  position: relative;
+  overflow: hidden;
+}
+
+.About-header {
+  position: relative;
+  z-index: 3; /* текст над частицами */
+}
+
+.about_section canvas {
+  z-index: 1;
+}
+
 @-webkit-keyframes animate-positive {
     0% {
         width: 0%;

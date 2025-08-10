@@ -28,6 +28,16 @@ button.btn.ac_btn:hover {
     animation: shift-rightwards 1s ease-in-out infinite;
     animation-delay: .3s;
 }
+.contact-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-content {
+  position: relative;
+  z-index: 3; /* чтобы текст был над частицами */
+}
+
 
 @keyframes shift-rightwards {
     0% {

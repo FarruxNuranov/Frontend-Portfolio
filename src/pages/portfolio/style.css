@@ -79,6 +79,16 @@
   border-color: rgba(255,255,255,.6);
 }
 
+.portfolio-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.portfolio-content {
+  position: relative;
+  z-index: 3; /* контент над частицами */
+}
+
 /* Тач-устройства: показываем подпись без ховера */
 @media (hover: none) {
   .po_item .content { opacity: 1; }
