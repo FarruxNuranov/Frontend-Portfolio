@@ -27,10 +27,10 @@ export default function NetParticlesLeft() {
       fpsLimit: 60,
       interactivity: {
         events: { onHover: { enable: true, mode: "grab" }, resize: true },
-        modes: { grab: { distance: 160, links: { opacity: 0.45 } } },
+        modes: { grab: { distance: 160, links: { opacity: 1.45 } } },
       },
       particles: {
-        number: { value: 80, density: { enable: true, area: 800 } },
+        number: { value: 200, density: { enable: true, area: 800 } },
         color: { value: color },
         links: { enable: true, color, distance: 140, opacity: 0.35, width: 1 },
         move: { enable: true, speed: 1.6, outModes: { default: "out" } },

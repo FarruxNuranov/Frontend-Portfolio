@@ -2,7 +2,7 @@ import { mainBackground, p1, p2, p3, p4, p5, p6 } from "./config/Image";
 
 const logotext = "FaraOFF";
 const meta = {
-  title: "Farrux Nuranov",
+  title: "Nuranov",
   description:
     "Я — Farrux Nuranov, frontend-разработчик, создаю современные и удобные веб-приложения. Люблю превращать идеи в живой код и делаю интерфейсы, которые работают быстро и выглядят стильно.",
 };
